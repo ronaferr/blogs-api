@@ -1,4 +1,4 @@
-/* const { User } = require('../database/models');
+const { User } = require('../database/models');
 
 const validationLogin = async (req, res, next) => {
   const { email, password } = req.body;
@@ -18,4 +18,4 @@ const validationLogin = async (req, res, next) => {
 
 module.exports = {
   validationLogin,
-}; */
+};
