@@ -1,4 +1,7 @@
 'use strict';
+
+const { uniq } = require('shelljs');
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Users', {
@@ -14,7 +17,8 @@ module.exports = {
       },
       email: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        uniq: true
       },
       password: {
         allowNull: false,
