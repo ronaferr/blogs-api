@@ -14,4 +14,14 @@ const categoryCreateController = async (req, res) => {
   }
 };
 
-module.exports = { categoryCreateController };
+const categoryGetAll = async (_req, res) => {
+  try {
+    const result = await service.categoryGetAll();
+
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(error.status).json({ message: error.message });
+  }
+};
+
+module.exports = { categoryCreateController, categoryGetAll };

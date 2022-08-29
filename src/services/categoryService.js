@@ -6,4 +6,9 @@ const categoryCreateService = async ({ name }) => {
   return result;
 };
 
-module.exports = { categoryCreateService };
+const categoryGetAll = async () => {
+  const result = await Category.findAll(/* { attributes: { exclude: ['password'] } } */);
+  return result;
+};
+
+module.exports = { categoryCreateService, categoryGetAll };
