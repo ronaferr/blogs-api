@@ -10,4 +10,6 @@ userRoute.post('/', validation.validationUser,
 
 userRoute.get('/', validation.validationToken, user.userGetAll);
 
+userRoute.get('/:id', validation.validationToken, user.userGetById);
+
 module.exports = userRoute;

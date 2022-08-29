@@ -26,4 +26,16 @@ const userGetAll = async (_req, res) => {
   }
 };
 
-module.exports = { userCreateController, userGetAll };
+const userGetById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await service.userGetById(id);
+    if (!user) return res.status(404).json({ message: 'User does not exist' });
+
+    return res.status(200).json(user);
+  } catch (error) {
+    return res.status(error.status).json({ message: error.message });
+  }
+};
+
+module.exports = { userCreateController, userGetAll, userGetById };

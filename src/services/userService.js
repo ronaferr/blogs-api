@@ -10,4 +10,10 @@ const userGetAll = async () => {
   return result;
 };
 
-module.exports = { userCreateService, userGetAll };
+const userGetById = async (id) => {
+  const result = await User.findOne({ where: { id },
+    attributes: { exclude: ['password', 'createdAt', 'updatedAt'] } });
+  return result;
+};
+
+module.exports = { userCreateService, userGetAll, userGetById };
