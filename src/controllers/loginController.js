@@ -1,20 +1,10 @@
- const jwt = require('jsonwebtoken');
-
-const service = require('../services/loginService');
-
- const { JWT_SECRET } = process.env;
+const tokenGenerator = require('../middlewares/tokenGenerator');
 
 const loginController = async (req, res) => {
   try {
     const { email } = req.body;
 
-    const jwtConfig = {
-      expiresIn: '1d',
-      algorithm: 'HS256',
-    };
-    const user = await service.loginService(email);
-  
-    const token = jwt.sign({ data: user }, JWT_SECRET, jwtConfig);
+    const token = await tokenGenerator(email);
 
     return res.status(200).json({ token });
   } catch (error) {

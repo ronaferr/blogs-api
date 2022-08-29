@@ -2,16 +2,15 @@ const express = require('express');
 
 // ...
 
-const login = require('./controllers/loginController');
-const validation = require('./middlewares/validations');
+const routes = require('./routes');
 
 const app = express();
 
 app.use(express.json());
 
 // ...
-
-app.post('/login', validation.validationLogin, login.loginController);
+app.use('/login', routes.loginRoute);
+app.use('/user', routes.userRoute);
 
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
