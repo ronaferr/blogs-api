@@ -5,4 +5,9 @@ const userCreateService = async ({ displayName, email, password, image }) => {
   return result;
 };
 
-module.exports = { userCreateService };
+const userGetAll = async () => {
+  const result = await User.findAll({ attributes: { exclude: ['password'] } });
+  return result;
+};
+
+module.exports = { userCreateService, userGetAll };

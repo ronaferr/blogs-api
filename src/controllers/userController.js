@@ -16,4 +16,14 @@ const userCreateController = async (req, res) => {
   }
 };
 
-module.exports = { userCreateController };
+const userGetAll = async (_req, res) => {
+  try {
+    const result = await service.userGetAll();
+
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(error.status).json({ message: error.message });
+  }
+};
+
+module.exports = { userCreateController, userGetAll };

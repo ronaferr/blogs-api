@@ -8,4 +8,6 @@ const userRoute = express.Router();
 userRoute.post('/', validation.validationUser,
   validation.validationEmail, user.userCreateController);
 
+userRoute.get('/', validation.validationToken, user.userGetAll);
+
 module.exports = userRoute;

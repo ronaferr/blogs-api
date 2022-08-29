@@ -1,4 +1,8 @@
+const jwt = require('jsonwebtoken');
+
 const { User } = require('../database/models');
+
+const { JWT_SECRET } = process.env;
 
 const validationLogin = async (req, res, next) => {
   const { email, password } = req.body;
@@ -45,8 +49,28 @@ const validationEmail = async (req, res, next) => {
   next();
 };
 
+const validationToken = async (req, res, next) => {
+  const token = req.headers.authorization;
+  console.log(token);
+  if (!token) {
+    return res.status(401).json({ message: 'Token not found' });
+  }
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+  const user = await User.findOne({ where: { email: decoded.data.email } });
+  if (!user) {
+    return res.status(401).json({ message: 'Expired or invalid token' });
+  }
+  } catch (error) {
+    return res.status(401).json({ message: 'Expired or invalid token' });
+  }
+
+  next();
+};
+
 module.exports = {
   validationLogin,
   validationUser,
   validationEmail,
+  validationToken,
 };
