@@ -22,12 +22,10 @@ const postCreateController = async (req, res) => {
 
       console.log(`resultado result ${result}`);
 
-    const createPostCategories = categoryIds.map((cat) => ({ postId: decoded.data.id,
+    const createPostCategories = categoryIds.map((cat) => ({ postId: result.id,
       categoryId: cat }));
 
-      const a = await PostCategory.bulkCreate(createPostCategories, { transaction });
-
-      console.log(`resultado posts ${a}`);
+      await PostCategory.bulkCreate(createPostCategories, { transaction });
 
       return result;
     });
