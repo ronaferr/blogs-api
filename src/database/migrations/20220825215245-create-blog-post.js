@@ -19,6 +19,7 @@ module.exports = {
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        foreingKey: true,
         references: {
           model: 'Users',
           key: 'id',
@@ -27,10 +28,24 @@ module.exports = {
         onDelete: 'CASCADE',
       },
       published: {
-        type: 'TIMESTAMP'
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('NOW()')
       },
       updated: {
-        type: 'TIMESTAMP'
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('NOW()')
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('NOW()')
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('NOW()')
       }
     });
   },
